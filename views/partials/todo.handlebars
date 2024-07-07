@@ -1,25 +1,30 @@
-<li x-data="{ edit: false }" x-init="itemValue = ''" >
-    <form hx-patch="/todos/{{id}}" hx-target="closest li" hx-swap="outerHTML" class="border-b border-gray-200 flex items-center justify-between py-4">
+<li x-data="{ edit: false }" x-init="itemValue = ''" class="[&:not(:last-child)]:border-b border-gray-200">
+    <form hx-patch="/todos/{{id}}" hx-target="closest li" hx-swap="outerHTML" class="flex items-center justify-between py-4">
         <label class="flex items-center">
             <span x-show="!edit">
                 <input type="checkbox" name="done" hx-patch="/todos/{{id}}" hx-trigger="change" {{#if done}}checked{{/if}} class="mr-2">
                 <span>{{task}}</span>
             </span>
             <span x-show="edit">
-                <input type="text" value="{{task}}" name="task">
+                <input type="text" autocomplete="off" class="w-full px-4 py-2 mr-2 rounded-lg
+                                    border-gray-300 focus:outline-none
+                                      focus:border-blue-500" value="{{task}}" name="task">
             </span>
         </label>
 
         <div>
             <span x-show="!edit">
-                <button type="button" hx-delete="/todos/{{id}}" hx-confirm="Are you sure you want to delete?" hx-target="closest li" hx-swap="outerHTML" class="text-red-500 hover:text-red-700
-                    mr-2 delete-btn">Delete</button>
-                <button @click="edit=true" type="button" class="text-blue-500
-                        hover:text-blue-700 edit-btn">Edit</button>
+                
+                <button type="button" hx-delete="/todos/{{id}}" hx-confirm="Are you sure you want to delete?" hx-target="closest li" hx-swap="outerHTML" 
+                class="bg-red-500 hover:bg-red-700 
+                                    text-white font-bold py-2 px-4 rounded">Delete</button>
+                <button @click="edit=true" type="button" class="bg-blue-500 hover:bg-blue-700 
+                                    text-white font-bold py-2 px-4 rounded">Edit</button>
             </span>
             <span x-show="edit">
-                <button @click="edit=false" type="button" class="mr-2">Cancel</button>
-                <button type="submit" class="text-green-500">Update</button>
+                <button @click="edit=false" type="button" class="bg-white hover:bg-gray-50 text-black font-bold py-2 px-4 rounded border border-gray-200">Cancel</button>
+                <button type="submit" class="bg-green-500 hover:bg-green-700 
+                                    text-white font-bold py-2 px-4 rounded">Update</button>
             </span>
         </div>
     </form>

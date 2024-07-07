@@ -34,7 +34,7 @@ app.get('/', (req, res) => {
 app.post('/add', (req, res) => {
   const newTodo = { id: Date.now(), task: req.body.task, done: false };
   todos.push(newTodo);
-  res.render('partials/todo', newTodo);
+  res.render('partials/todo', { layout: false, ...newTodo });
 });
 
 app.delete('/todos/:id', (req, res) => {
@@ -47,7 +47,7 @@ app.patch('/todos/:id', (req, res) => {
   const { id } = req.params;
   todos = todos.map((todo) => todo.id === +id ? { ...todo, task: req.body.task, done: !!req.body.done }: todo);
   const updatedTodo = todos.find(todo => todo.id === +id);
-  res.render('partials/todo', updatedTodo);
+  res.render('partials/todo', { layout: false, ...updatedTodo });
 });
 
 // Start the server
