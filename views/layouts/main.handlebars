@@ -7,10 +7,13 @@
   <script src="https://unpkg.com/htmx.org@2.0.0" integrity="sha384-wS5l5IKJBvK6sPTKa2WZ1js3d947pvWXbPJ1OmWfEuxLgeHcEbjUUA5i9V5ZkpCw" crossorigin="anonymous"></script>
   {{!-- <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/alpine-morph.js"></script> --}}
   <script src="https://unpkg.com/alpinejs@3.2.3/dist/cdn.min.js" defer></script>
-  {{!-- <script src="/main.es.js"></script> --}}
-  {{!-- <link rel="stylesheet" href="/style.css"> --}}
-
-  <script type="module" src="http://localhost:5173/src/main.ts"></script>
+  {{#if (eq env 'development')}}
+    <script src="http://localhost:{{VITE_PORT}}/src/main.ts" type="module"></script>
+  {{/if}}
+  {{#if (eq env 'production')}}
+    <link rel="stylesheet" href="/style.css">
+    <script src="/main.es.js"></script>
+  {{/if}}
 </head>
 <body>
   {{{body}}}

@@ -1,17 +1,33 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 const app = express();
-const port = 3000;
-
+const port = 4321;
+// Handlebars.registerHelper('prod', () => {
+//   return process.env.NODE_ENV === 'production';
+// })
 // Configure Handlebars as the view engine
-app.engine('handlebars', exphbs.engine());
+app.engine('handlebars', exphbs.engine({
+  env: process.env.NODE_ENV,
+  helpers: {
+    eq: (v1, v2) => v1 === v2
+  }
+}));
 app.set('view engine', 'handlebars');
+
+app.use((req, res, next) => {
+  res.locals.env = process.env.NODE_ENV || 'development'; // Default to 'development' if NODE_ENV is not set
+  res.locals.VITE_PORT = process.env.VITE_PORT;
+  next();
+});
+
+
 
 // Set the path to your views directory
 app.set('views', __dirname + '/views');
 
 // Serve static files from the public directory
 // app.use(express.static('public'));
+console.log('VITE_PORT:', process.env.VITE_PORT);
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('dist'));
 } else {
@@ -32,7 +48,7 @@ let todos = [
 
 // Route to render the index page
 app.get('/', (req, res) => {
-    res.render('index', { todos: todos });
+  res.render('index', { todos: todos });
 });
 
 // Route to handle adding new todos
@@ -57,5 +73,5 @@ app.patch('/todos/:id', (req, res) => {
 
 // Start the server
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+  console.log(`\x1b[1m\x1b[36mExpress server site running at http://localhost:${port}\x1b[0m`);
 });
