@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+      "target": "ESNext",
+      "module": "ESNext",
+      "declaration": true,
+      "declarationDir": "./dist/types",
+      "outDir": "./dist",
+      "strict": true,
+      "moduleResolution": "node",
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true,
+      "experimentalDecorators": true,         // Enable experimental decorators
+      "emitDecoratorMetadata": true           // Enable metadata reflection API
+    },
+    "include": ["src"],
+    "exclude": ["node_modules", "dist"]
+  }
+  

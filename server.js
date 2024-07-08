@@ -11,7 +11,12 @@ app.set('view engine', 'handlebars');
 app.set('views', __dirname + '/views');
 
 // Serve static files from the public directory
-app.use(express.static('public'));
+// app.use(express.static('public'));
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('dist'));
+} else {
+  app.use(express.static('src'));
+}
 
 // Body parsing middleware
 app.use(express.json());

@@ -4,16 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Todo List</title>
-  <link rel="stylesheet" href="/css/styles.css">
   <script src="https://unpkg.com/htmx.org@2.0.0" integrity="sha384-wS5l5IKJBvK6sPTKa2WZ1js3d947pvWXbPJ1OmWfEuxLgeHcEbjUUA5i9V5ZkpCw" crossorigin="anonymous"></script>
   {{!-- <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/alpine-morph.js"></script> --}}
   <script src="https://unpkg.com/alpinejs@3.2.3/dist/cdn.min.js" defer></script>
+  {{!-- <script src="/main.es.js"></script> --}}
+  {{!-- <link rel="stylesheet" href="/style.css"> --}}
 
+  <script type="module" src="http://localhost:5173/src/main.ts"></script>
 </head>
 <body>
   {{{body}}}
   <div x-data="{ renderTime: new Date().toISOString() }" class="text-center">
-    Main page rendered at: <span x-text="renderTime"></span>
+    <small class="animate-fadeOut">Main page rendered at: <span x-text="renderTime"></span></small>
+  </div>
+  <div class="text-center">
+    <current-time>Main page rendered at:</current-time>
   </div>
 </body>
 </html>
