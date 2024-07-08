@@ -1,7 +1,15 @@
-## Dev playground
+## Installation
 
 > npm install
 
-> npm run build:css
+## Dev playground
 
-> node server.js
+> npm run dev
+
+## Prod build Test
+
+> npm run serve
+
+## Prod build
+
+> npm run build
